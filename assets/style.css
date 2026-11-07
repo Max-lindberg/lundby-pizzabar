@@ -120,7 +120,7 @@ h2 { font: 700 clamp(40px, 6.2vw, 92px)/.92 var(--sans); letter-spacing: -.045em
 .add.done { background: var(--basil); border-color: var(--basil); color: #fff; }
 
 /* ---------- menu ---------- */
-.menu { margin-top: var(--tk-pull); padding: clamp(60px, 8vw, 120px) var(--pad) clamp(80px, 10vw, 150px); background: var(--slip); border-bottom: 1px solid var(--line); position: relative; }
+.menu { padding: clamp(60px, 8vw, 120px) var(--pad) clamp(80px, 10vw, 150px); background: var(--slip); border-block: 1px solid var(--line); position: relative; }
 .menu-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 12px 30px; margin-bottom: 26px; }
 .menu-title { font: 400 clamp(44px, 5.4vw, 80px)/1 var(--display); color: var(--ink); letter-spacing: -.01em; }
 .menu-intro { font-size: 18px; color: var(--ink-2); max-width: 26em; }
@@ -214,7 +214,7 @@ h2 { font: 700 clamp(40px, 6.2vw, 92px)/.92 var(--sans); letter-spacing: -.045em
 .route-sub { font-weight: 400; opacity: .75; font-size: 13px; }
 
 /* ---------- about ---------- */
-.about { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 20px clamp(30px, 6vw, 100px); padding: clamp(70px, 9vw, 130px) var(--pad); border-top: 1px solid var(--line); }
+.about { position: relative; margin-top: var(--tk-pull); display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 20px clamp(30px, 6vw, 100px); padding: clamp(100px, 11vw, 160px) var(--pad) clamp(70px, 9vw, 120px); background: var(--paper); }
 .about .kicker { margin: 10px 0 0; }
 .about .since { color: var(--muted); }
 .about-text h2 { font-size: clamp(30px, 3.4vw, 50px); line-height: 1.02; letter-spacing: -.035em; max-width: 16em; }
@@ -328,7 +328,7 @@ h2 { font: 700 clamp(40px, 6.2vw, 92px)/.92 var(--sans); letter-spacing: -.045em
   .status [data-status-text] { overflow: hidden; text-overflow: ellipsis; }
   .brand { flex: none; }
   .visit, .about { grid-template-columns: 1fr; }
-  .about { padding-block: 56px; gap: 4px; }
+  .about { padding-block: 72px 52px; gap: 4px; }
   .menu-head { grid-template-columns: 1fr; }
   .menu-tools { top: var(--top-h); }
   .cat-nav { top: calc(var(--top-h) + 60px); margin-top: -10px; }
