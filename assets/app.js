@@ -3,8 +3,6 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const PHONE = "55 76 65 65";
-  const SIZE_WORD = { alm: "alm.", deep: "deep", fam: "familie" };
   const SIZE_LONG = { alm: "almindelig", deep: "deep", fam: "familie" };
   const kr = (n) => `${n},-`;
   document.documentElement.classList.add("js");
@@ -18,7 +16,6 @@
       items.push(it); byKey.set(it.key, it); return it;
     });
   });
-  MENU.offers.forEach((o) => byKey.set(`offer-${o.id}`, { key: `offer-${o.id}`, n: "", name: o.name, desc: o.desc, prices: [o.price], cat: { id: "offers" } }));
 
   let size = localStorage.getItem("lundby-size") || "alm";
   const priceFor = (it, sz = size) => {
@@ -92,122 +89,44 @@
       nxt.style.position = ""; nxt.style.left = ""; nxt.style.top = "";
     };
   }
-  function rollSlot(slot, text) {
-    // animate the slot width so the sentence re-flows smoothly
-    const probe = document.createElement("span"); probe.textContent = text;
-    probe.style.cssText = "position:absolute;visibility:hidden;white-space:nowrap";
-    slot.appendChild(probe);
-    const w = probe.getBoundingClientRect().width; probe.remove();
-    const cs = getComputedStyle(slot);
-    slot.style.width = `${slot.getBoundingClientRect().width}px`;
-    requestAnimationFrame(() => { slot.style.width = `${w + parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight)}px`; });
-    roll(slot, text);
+  /* ------------------------------------------------------------ rolling pizzas */
+  // Each pizza rolls back and forth inside its own lane; rotation = distance / radius, so it truly rolls.
+  const floor = $("[data-stage]");
+  const ROLLERS = ["pizza-5", "pizza-24", "pizza-4", "pizza-8", "mexicansk-29", "pizza-7"];
+  let rollers = [], stageVisible = true, t0 = performance.now();
+  function buildStage() {
+    const W = floor.clientWidth;
+    const n = W >= 1100 ? 5 : W >= 700 ? 4 : 3;
+    const lane = W / n;
+    const D = Math.round(Math.min(230, lane * (n === 3 ? 0.74 : 0.66)));
+    floor.style.height = `${D + 26}px`;
+    floor.innerHTML = "";
+    rollers = ROLLERS.slice(0, n).map((key, i) => {
+      const it = byKey.get(key), seed = Pizza.hash(it.n + it.name);
+      const el = document.createElement("div");
+      el.className = "roller";
+      el.style.width = el.style.height = `${D}px`;
+      // markup comes from our own static menu data, not user input
+      el.innerHTML = `<span class="roller-shadow"></span><svg viewBox="-100 -100 200 200"><g>${Pizza.base(seed)}${Pizza.toppings(Pizza.ingredients(it.desc), seed, 1)}</g></svg>`;
+      floor.appendChild(el);
+      return { el, g: el.querySelector("svg > g"), L: i * lane, travel: lane - D, D, T: 5200 + i * 650, ph: [0, 2.1, 4.0, 1.2, 3.1][i] || 0 };
+    });
+    frame(performance.now());
   }
-
-  /* ------------------------------------------------------------ hero pizza */
-  const svg = $("#heroPizza");
-  const SL = 8, PULL = 1, GAP = 0.7, RAD = 104;
-  const pol = (a, r) => [Math.cos(a * Math.PI / 180) * r, Math.sin(a * Math.PI / 180) * r];
-  const ang = (i) => [i * 45 - 90 + GAP / 2, (i + 1) * 45 - 90 - GAP / 2];
-  const wedgeD = (i, rad = RAD) => { const [a0, a1] = ang(i), p0 = pol(a0, rad), p1 = pol(a1, rad); return `M0 0L${p0[0].toFixed(2)} ${p0[1].toFixed(2)}A${rad} ${rad} 0 0 1 ${p1[0].toFixed(2)} ${p1[1].toFixed(2)}Z`; };
-  let defs = "";
-  for (let i = 0; i < SL; i++) defs += `<clipPath id="w${i}"><path d="${wedgeD(i)}"/></clipPath>`;
-  const slice = (i) => `<g class="slice" clip-path="url(#w${i})"><g class="base"></g><g class="tops"></g></g>`;
-  let body = ""; for (let i = 0; i < SL; i++) if (i !== PULL) body += slice(i);
-  svg.innerHTML = `<defs>${defs}</defs>
-    <g class="spin"><g class="body">${body}</g><path class="pull-shadow" d="${wedgeD(PULL)}" fill="#5a2a10" opacity="0"/><g class="strings"></g><g class="pulled">${slice(PULL)}</g></g>`;
-  const baseMarkup = Pizza.base(1997);
-  $$(".base", svg).forEach((g) => (g.innerHTML = baseMarkup));
-  const pulled = $(".pulled", svg), strings = $(".strings", svg), pshadow = $(".pull-shadow", svg);
-  pshadow.setAttribute("d", wedgeD(PULL, 97));
-
-  function setToppings(it, animate) {
-    const list = Pizza.ingredients(it.desc, { salad: it.cat.salad });
-    const markup = Pizza.toppings(list, Pizza.hash(it.n + it.name), 1.15);
-    $$(".tops", svg).forEach((g) => {
-      const old = Array.from(g.children);
-      if (animate && !reduce) {
-        old.forEach((el) => el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 260, fill: "forwards" }).onfinish = () => el.remove());
-      } else old.forEach((el) => el.remove());
-      const frag = document.createElementNS("http://www.w3.org/2000/svg", "g");
-      frag.innerHTML = markup;
-      const fresh = Array.from(frag.children);
-      fresh.forEach((el) => g.appendChild(el));
-      if (animate && !reduce) {
-        fresh.forEach((wrap, k) => {
-          const dz = wrap.querySelector(".dz");
-          if (dz) {
-            dz.style.strokeDasharray = "1"; 
-            dz.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], { duration: 900, delay: 380 + k * 8, easing: "cubic-bezier(.6,0,.2,1)", fill: "both" });
-            return;
-          }
-          const tp = wrap.firstElementChild;
-          tp.animate([{ transform: "scale(0) rotate(-40deg)", opacity: 0 }, { transform: "scale(1.15)", opacity: 1, offset: .7 }, { transform: "scale(1) rotate(0)", opacity: 1 }],
-            { duration: 520, delay: 160 + k * 14, easing: "cubic-bezier(.2,.8,.3,1)", fill: "both" });
-        });
-      }
+  function frame(now) {
+    const t = now - t0;
+    rollers.forEach((r) => {
+      const x = r.L + r.travel * (0.5 - 0.5 * Math.cos((2 * Math.PI * t) / r.T + r.ph));
+      const deg = (x / (r.D / 2)) * (180 / Math.PI);
+      r.el.style.transform = `translate3d(${x.toFixed(1)}px,0,0)`;
+      r.g.setAttribute("transform", `rotate(${deg.toFixed(1)})`);
     });
   }
-
-  // slice pulled out on scroll, with stretching cheese strings
-  const [pa0, pa1] = ang(PULL), mid = (pa0 + pa1) / 2;
-  const dirv = pol(mid, 1);
-  const anchors = [[pa0, 34], [pa0, 58], [pa0, 76], [pa1, 30], [pa1, 52], [pa1, 72]];
-  function pullSlice(p) {
-    const d = p * 58;
-    const dx = dirv[0] * d, dy = dirv[1] * d;
-    pulled.setAttribute("transform", `translate(${dx.toFixed(2)} ${dy.toFixed(2)}) rotate(${(p * 6).toFixed(2)})`);
-    pshadow.setAttribute("transform", `translate(${(dx + 3 * p).toFixed(2)} ${(dy + 9 * p).toFixed(2)}) rotate(${(p * 6).toFixed(2)})`);
-    pshadow.setAttribute("opacity", (Math.min(1, p * 4) * 0.13).toFixed(3));
-    if (p < 0.02) { strings.innerHTML = ""; return; }
-    const w = Math.max(0.6, 3.4 - p * 3), op = p > 0.85 ? Math.max(0, 1 - (p - 0.85) / 0.15) : 1;
-    strings.innerHTML = anchors.map(([a, r], k) => {
-      const [bx, by] = pol(a, r);
-      const ex = bx + dx, ey = by + dy;
-      const sag = (k % 2 ? 1 : -1) * 3 + 6 * p;
-      const mx = (bx + ex) / 2 + dirv[1] * sag, my = (by + ey) / 2 - dirv[0] * sag + 4 * p;
-      return `<path d="M${bx.toFixed(1)} ${by.toFixed(1)}Q${mx.toFixed(1)} ${my.toFixed(1)} ${ex.toFixed(1)} ${ey.toFixed(1)}" stroke="#F6DFA4" stroke-width="${(w * (k % 3 === 1 ? 1.3 : 1)).toFixed(2)}" stroke-linecap="round" fill="none" opacity="${op.toFixed(2)}"/>`;
-    }).join("");
-  }
-  const hero = $(".hero"), heroPizza = $(".hero-pizza");
-  let ticking = false;
-  function onScroll() {
-    if (ticking) return; ticking = true;
-    requestAnimationFrame(() => {
-      ticking = false;
-      const h = hero.offsetHeight;
-      const p = Math.min(1, Math.max(0, scrollY / (h * 0.55)));
-      pullSlice(reduce ? 0 : p);
-      if (!reduce && document.documentElement.classList.contains("settled")) heroPizza.style.transform = `translateY(${(scrollY * 0.12).toFixed(1)}px)`;
-    });
-  }
-  addEventListener("scroll", onScroll, { passive: true });
-
-  /* hero order cycle */
-  const ORDERS = [["pizza-7", "fam"], ["pizza-24", "deep"], ["pizza-1", "alm"], ["pizza-17", "fam"], ["mexicansk-30", "deep"], ["pizza-13", "alm"], ["pizza-22", "fam"], ["pizza-8", "deep"], ["salatpizza-33", "fam"], ["pizza-14", "alm"], ["mexicansk-32", "fam"], ["pizza-4", "deep"]];
-  let oi = 0, heroItem, heroSize;
-  const cap = $("[data-caption]"), slotNum = $('[data-slot="num"]'), slotSize = $('[data-slot="size"]');
-  function showOrder(i, animate) {
-    const [key, sz] = ORDERS[i]; heroItem = byKey.get(key); heroSize = sz;
-    if (animate) { rollSlot(slotNum, heroItem.n); rollSlot(slotSize, SIZE_WORD[sz]); }
-    else { slotNum.firstElementChild.textContent = heroItem.n; slotSize.firstElementChild.textContent = SIZE_WORD[sz]; }
-    $(".oc-name", cap).textContent = heroItem.name;
-    $(".oc-desc", cap).textContent = heroItem.desc || "tomatsauce og ost";
-    $(".oc-price", cap).textContent = `${SIZE_WORD[sz]} ${kr(priceFor(heroItem, sz))}`;
-    $("#hero-title").setAttribute("aria-label", `Nummer ${heroItem.n}, ${SIZE_LONG[sz]}, tak.`);
-    if (animate) { cap.classList.remove("swap"); void cap.offsetWidth; cap.classList.add("swap"); }
-    setToppings(heroItem, animate);
-  }
-  showOrder(0, false);
-  let cycle = null, heroVisible = true, paused = false;
-  function startCycle() {
-    if (reduce || cycle) return;
-    cycle = setInterval(() => { if (!heroVisible || paused || document.hidden) return; oi = (oi + 1) % ORDERS.length; showOrder(oi, true); }, 3600);
-  }
-  new IntersectionObserver(([e]) => (heroVisible = e.isIntersecting), { threshold: 0.2 }).observe(hero);
-  $(".hero-copy").addEventListener("pointerenter", () => (paused = true));
-  $(".hero-copy").addEventListener("pointerleave", () => (paused = false));
-  $("[data-hero-add]").addEventListener("click", (e) => addToBong(heroItem, heroSize, e.currentTarget));
+  function loop(now) { if (stageVisible && !document.hidden) frame(now); requestAnimationFrame(loop); }
+  buildStage();
+  let rs; addEventListener("resize", () => { clearTimeout(rs); rs = setTimeout(buildStage, 150); });
+  new IntersectionObserver(([e]) => (stageVisible = e.isIntersecting)).observe(floor);
+  if (!reduce) requestAnimationFrame(loop);
 
   /* ------------------------------------------------------------ ticker */
   const names = [...new Set(items.filter((i) => i.cat.pizza).map((i) => i.name))];
@@ -224,18 +143,6 @@
       requestAnimationFrame(loop);
     })();
   }
-
-  /* ------------------------------------------------------------ offers */
-  $("[data-offers]").innerHTML = MENU.offers.map((o) => `
-    <li class="offer" data-reveal data-key="offer-${o.id}">
-      <span class="of-price">${kr(o.price)}</span>
-      <div class="of-body"><h3 class="of-name">${o.name}</h3><p class="of-desc">${o.desc}</p></div>
-      <button class="add" type="button" data-add="offer-${o.id}" aria-label="Læg ${o.name} på bongen">+</button>
-    </li>`).join("");
-  $$(".offer").forEach((li) => li.addEventListener("click", (e) => {
-    if (e.target.closest(".add")) return;
-    li.querySelector(".add").click();
-  }));
 
   /* ------------------------------------------------------------ menu */
   const catsEl = $("[data-cats]"), navEl = $("[data-catnav]");
@@ -369,7 +276,7 @@
       total += p; count += l.qty;
       const label = `${it.n ? `Nr. ${it.n} ` : ""}${it.name}`;
       return `<li data-line="${l.id}"><span class="p-qty"><button type="button" data-dec aria-label="Én mindre">−</button><b>${l.qty}</b><button type="button" data-inc aria-label="Én mere">+</button></span>
-        <span class="p-name">${esc(label)}${l.size ? `<small>${SIZE_LONG[l.size]}</small>` : it.desc && it.cat.id === "offers" ? `<small>${esc(it.desc)}</small>` : ""}</span><span class="p-sum">${kr(p)}</span></li>`;
+        <span class="p-name">${esc(label)}${l.size ? `<small>${SIZE_LONG[l.size]}</small>` : ""}</span><span class="p-sum">${kr(p)}</span></li>`;
     }).join("");
     $("[data-bong-total]").textContent = kr(total);
     $("[data-bong-count]").textContent = count;
@@ -439,13 +346,11 @@
   /* ------------------------------------------------------------ reveal */
   $$(".sec-head, .menu-head, .visit-info, .cat-head, .about-text").forEach((el) => el.setAttribute("data-reveal", ""));
   const rev = new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); rev.unobserve(e.target); } }), { rootMargin: "0px 0px -10% 0px" });
-  $$("[data-reveal]").forEach((el, i) => { el.style.transitionDelay = el.classList.contains("offer") ? `${(i % 4) * 70}ms` : ""; rev.observe(el); });
+  $$("[data-reveal]").forEach((el, i) => { rev.observe(el); });
 
   /* ------------------------------------------------------------ go */
   const go = () => {
     document.documentElement.classList.add("ready");
-    setTimeout(() => { document.documentElement.classList.add("settled"); heroPizza.style.transition = "none"; startCycle(); onScroll(); }, 1900);
   };
   (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => requestAnimationFrame(go));
-  onScroll();
 })();

@@ -1,12 +1,6 @@
 /* Menukort 2024 – kontrolleret mod dagensmenu.dk/lundby-pizza (menukort-scan i høj opløsning).
    Priser i kr. Pizza-størrelser: alm, deep, fam. */
 window.MENU = {
-  offers: [
-    { id: "kebabbox", name: "Kebab Box", desc: "med kebab eller kylling", price: 50 },
-    { id: "burgermenu", name: "Burger Menu", desc: "Big Burger, lille pommes frites, salatmayonnaise, 0,33 l sodavand", price: 115 },
-    { id: "hjburgermenu", name: "Hjemmelavet Burger Menu", desc: "Klassisk Burger, lille pommes frites, salatmayonnaise, 0,33 l sodavand", price: 125 },
-    { id: "kebabmenu", name: "Kebab Menu", desc: "Pitabrød med kebab, lille pommes frites, salatmayonnaise, 0,33 l sodavand", price: 95 }
-  ],
   categories: [
     {
       id: "pizza", nav: "Pizza", title: "Pizza", note: "Alle pizzaer er med tomatsauce og ost", sizes: ["alm", "deep", "fam"], pizza: true,
@@ -82,7 +76,7 @@ window.MENU = {
       items: [
         ["41", "Kebab Ret", "2 stk. pitabrød, pommes frites, salat, dressing", [99]],
         ["42", "Lundby Bøf", "2 stk. med pommes frites, salat, dressing, bearnaise", [105]],
-        ["43", "½ Kylling", "med pommes frites, salat, dressing, remoulade", [95]],
+        ["43", "½ Kylling", "med pommes frites, salat, dressing, remoulade", [110]],
         ["43A", "½ Kylling", "uden tilbehør", [70]],
         ["44", "Chicken Dipper", "10 stk. med pommes frites, salatmayonnaise, salat og dressing", [95]],
         ["44A", "Chicken Dipper", "10 stk. uden tilbehør", [70]],
