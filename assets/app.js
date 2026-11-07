@@ -89,60 +89,20 @@
       nxt.style.position = ""; nxt.style.left = ""; nxt.style.top = "";
     };
   }
-  /* ------------------------------------------------------------ rolling pizzas */
-  // Each pizza rolls back and forth inside its own lane; rotation = distance / radius, so it truly rolls.
+  /* ------------------------------------------------------------ big pizza */
   const floor = $("[data-stage]");
-  const ROLLERS = ["pizza-5", "pizza-24", "pizza-4", "pizza-8", "mexicansk-29", "pizza-7"];
-  let rollers = [], stageVisible = true, t0 = performance.now();
-  function buildStage() {
-    const W = floor.clientWidth;
-    const n = W >= 1100 ? 5 : W >= 700 ? 4 : 3;
-    const lane = W / n;
-    const D = Math.round(Math.min(230, lane * (n === 3 ? 0.74 : 0.66)));
-    floor.style.height = `${D + 26}px`;
-    floor.innerHTML = "";
-    rollers = ROLLERS.slice(0, n).map((key, i) => {
-      const it = byKey.get(key), seed = Pizza.hash(it.n + it.name);
-      const el = document.createElement("div");
-      el.className = "roller";
-      el.style.width = el.style.height = `${D}px`;
-      // markup comes from our own static menu data, not user input
-      el.innerHTML = `<span class="roller-shadow"></span><svg viewBox="-100 -100 200 200"><g>${Pizza.base(seed)}${Pizza.toppings(Pizza.ingredients(it.desc), seed, 1)}</g></svg>`;
-      floor.appendChild(el);
-      return { el, g: el.querySelector("svg > g"), L: i * lane, travel: lane - D, D, T: 5200 + i * 650, ph: [0, 2.1, 4.0, 1.2, 3.1][i] || 0 };
-    });
-    frame(performance.now());
+  {
+    const it = byKey.get("pizza-5"), seed = Pizza.hash(it.n + it.name);
+    // markup comes from our own static menu data, not user input
+    floor.innerHTML = `<div class="big-pizza"><span class="big-shadow"></span><svg viewBox="-100 -100 200 200"><g class="big-spin">${Pizza.base(seed)}${Pizza.toppings(Pizza.ingredients(it.desc), seed, 1.2)}</g></svg></div>`;
   }
-  function frame(now) {
-    const t = now - t0;
-    rollers.forEach((r) => {
-      const x = r.L + r.travel * (0.5 - 0.5 * Math.cos((2 * Math.PI * t) / r.T + r.ph));
-      const deg = (x / (r.D / 2)) * (180 / Math.PI);
-      r.el.style.transform = `translate3d(${x.toFixed(1)}px,0,0)`;
-      r.g.setAttribute("transform", `rotate(${deg.toFixed(1)})`);
-    });
-  }
-  function loop(now) { if (stageVisible && !document.hidden) frame(now); requestAnimationFrame(loop); }
-  buildStage();
-  let rs; addEventListener("resize", () => { clearTimeout(rs); rs = setTimeout(buildStage, 150); });
-  new IntersectionObserver(([e]) => (stageVisible = e.isIntersecting)).observe(floor);
-  if (!reduce) requestAnimationFrame(loop);
 
   /* ------------------------------------------------------------ ticker */
   const names = [...new Set(items.filter((i) => i.cat.pizza).map((i) => i.name))];
   const track = $("[data-ticker]");
   const chunk = names.map((n) => `<span>${n}</span>`).join("");
   track.innerHTML = chunk + chunk;
-  let tickerAnim = null, lastY = scrollY, boost = 0;
-  if (!reduce) {
-    tickerAnim = track.animate([{ transform: "translateX(0)" }, { transform: "translateX(-50%)" }], { duration: 70000, iterations: Infinity });
-    (function loop() {
-      const v = Math.abs(scrollY - lastY); lastY = scrollY;
-      boost = boost * 0.9 + v * 0.06;
-      tickerAnim.playbackRate = 1 + Math.min(boost, 6);
-      requestAnimationFrame(loop);
-    })();
-  }
+  if (!reduce) track.animate([{ transform: "translateX(0)" }, { transform: "translateX(-50%)" }], { duration: 70000, iterations: Infinity });
 
   /* ------------------------------------------------------------ menu */
   const catsEl = $("[data-cats]"), navEl = $("[data-catnav]");
