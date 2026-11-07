@@ -13,6 +13,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preload" href="fonts/familjen.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/shrikhand.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/vendor/leaflet.css">
   <link rel="stylesheet" href="assets/style.css">
   <script type="application/ld+json">
   {
@@ -148,9 +149,7 @@
           <li>Spis her</li><li>Udendørs servering</li><li>Afhentning</li><li>Dankort &amp; Visa</li><li>Ingen udbringning</li>
         </ul>
         <div class="map">
-          <iframe title="Kort over Lundby Hovedgade 93, 4750 Lundby" loading="lazy" referrerpolicy="no-referrer"
-            src="https://www.openstreetmap.org/export/embed.html?bbox=11.8665%2C55.1058%2C11.8855%2C55.1128&amp;layer=mapnik"></iframe>
-          <span class="map-pin" aria-hidden="true"><span>Lundby<br>Pizza</span></span>
+          <div class="map-canvas" data-map role="region" aria-label="Kort over Lundby Hovedgade 93, 4750 Lundby"></div>
           <a class="map-open" href="https://www.google.com/maps/search/?api=1&amp;query=Lundby+Pizzabar,+Lundby+Hovedgade+93,+4750+Lundby" target="_blank" rel="noopener">Åbn stort kort ↗</a>
         </div>
         <div class="route">

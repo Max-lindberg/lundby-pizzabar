@@ -407,6 +407,31 @@
   sign.addEventListener("pointerenter", swing);
   sign.addEventListener("click", swing);
 
+  /* ------------------------------------------------------------ map (Leaflet, loaded when visible) */
+  const mapEl = $("[data-map]");
+  const LUNDBY = [55.10929, 11.87598]; // OSM node 3806200107, Lundby Pizzabar
+  function initMap() {
+    const map = L.map(mapEl, {
+      center: LUNDBY, zoom: 16, scrollWheelZoom: false,
+      dragging: !L.Browser.mobile, tap: false, attributionControl: true
+    });
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+    L.marker(LUNDBY, {
+      icon: L.divIcon({ className: "", html: '<div class="pin"><span>Lundby<br>Pizza</span></div>', iconSize: [0, 0], iconAnchor: [0, 0] }),
+      keyboard: false, title: "Lundby Pizza & Grillbar"
+    }).addTo(map);
+    map.attributionControl.setPrefix(false);
+  }
+  new IntersectionObserver(([e], o) => {
+    if (!e.isIntersecting) return;
+    o.disconnect();
+    const s = document.createElement("script");
+    s.src = "assets/vendor/leaflet.js"; s.onload = initMap;
+    document.head.appendChild(s);
+  }, { rootMargin: "400px 0px" }).observe(mapEl);
+
   /* ------------------------------------------------------------ reveal */
   $$(".sec-head, .menu-head, .visit-info, .cat-head, .about-text").forEach((el) => el.setAttribute("data-reveal", ""));
   const rev = new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); rev.unobserve(e.target); } }), { rootMargin: "0px 0px -10% 0px" });
