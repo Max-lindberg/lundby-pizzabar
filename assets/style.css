@@ -91,8 +91,8 @@ h2 { font: 700 clamp(40px, 6.2vw, 92px)/.92 var(--sans); letter-spacing: -.045em
 
 /* ---------- stage: one big pizza ---------- */
 .stage { padding: calc(var(--top-h) + clamp(20px, 4vw, 56px)) var(--pad) 0; }
-.stage-floor { display: grid; place-items: center; }
-.big-pizza { position: relative; width: min(640px, 84vw); aspect-ratio: 1; }
+.stage-floor { --pz: min(640px, 84vw); position: relative; z-index: 1; height: calc(var(--pz) / 2); overflow: hidden; display: flex; justify-content: center; align-items: flex-start; }
+.big-pizza { position: relative; flex: none; width: var(--pz); aspect-ratio: 1; }
 .big-pizza svg { position: relative; width: 100%; height: 100%; overflow: visible; }
 .big-shadow { position: absolute; inset: 6% 4% 0 8%; border-radius: 50%; background: radial-gradient(closest-side, rgba(90, 45, 15, .24), rgba(90, 45, 15, 0)); transform: translateY(5%); filter: blur(6px); }
 .big-spin { transform-box: view-box; transform-origin: 0 0; animation: spin 120s linear infinite; }
@@ -102,7 +102,7 @@ h2 { font: 700 clamp(40px, 6.2vw, 92px)/.92 var(--sans); letter-spacing: -.045em
 @media (prefers-reduced-motion: reduce) { .big-spin { animation: none; } }
 
 /* ---------- ticker ---------- */
-.ticker { position: relative; z-index: 3; background: var(--tomato); color: #FFF4E4; transform: rotate(-2.2deg); margin: 34px -4vw 26px; padding: 18px 0 14px; overflow: hidden; box-shadow: 0 14px 30px -18px rgba(120, 30, 10, .6); }
+.ticker { position: relative; z-index: 3; background: var(--tomato); color: #FFF4E4; transform: rotate(-2.2deg); margin: var(--tk-pull, -38px) -4vw 26px; padding: 18px 0 14px; overflow: hidden; box-shadow: 0 14px 30px -18px rgba(120, 30, 10, .6); }
 .ticker-track { display: flex; width: max-content; font: 400 clamp(26px, 3.2vw, 44px)/1 var(--display); white-space: nowrap; will-change: transform; }
 .ticker-track span { padding: 0 .55em; display: inline-flex; align-items: center; gap: .55em; }
 .ticker-track span::after { content: ""; width: .32em; height: .32em; border-radius: 50%; background: var(--cheese); }
@@ -302,7 +302,7 @@ h2 { font: 700 clamp(40px, 6.2vw, 92px)/.92 var(--sans); letter-spacing: -.045em
   .brand-word { font-size: 23px; }
   .top { gap: 14px; }
   .status { font-size: 12px; }
-  .ticker { margin-top: 0; padding: 12px 0 9px; }
+  .ticker { --tk-pull: -22px; padding: 12px 0 9px; }
   .ticker-track { font-size: 24px; }
   .menu { padding-top: 46px; }
   .menu-intro { font-size: 15px; }
