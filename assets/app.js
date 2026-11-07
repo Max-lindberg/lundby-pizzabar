@@ -19,9 +19,6 @@
     });
   });
   MENU.offers.forEach((o) => byKey.set(`offer-${o.id}`, { key: `offer-${o.id}`, n: "", name: o.name, desc: o.desc, prices: [o.price], cat: { id: "offers" } }));
-  const countable = items.filter((i) => !i.cat.noAdd && i.n);
-  $("[data-count]").textContent = countable.length + MENU.offers.length;
-  $("[data-years]").textContent = new Date().getFullYear() - 1997;
 
   let size = localStorage.getItem("lundby-size") || "alm";
   const priceFor = (it, sz = size) => {
@@ -44,29 +41,31 @@
     const { day, min } = cphNow();
     const closedDay = day === 1;
     const open = !closedDay && min >= OPEN && min < CLOSE;
-    let text, sign;
+    let text, short, sign;
     if (open) {
       const left = CLOSE - min;
       text = left <= 45 ? `Åbent · lukker om ${left} min` : "Åbent nu · til 20.30";
+      short = left <= 45 ? `Lukker om ${left} min` : "Åbent til 20.30";
       sign = ["Vi har", "Åbent", "til kl. 20.30"];
     } else if (!closedDay && min < OPEN) {
-      text = "Åbner i dag kl. 16";
+      text = "Åbner i dag kl. 16"; short = "Åbner kl. 16";
       sign = ["Vi har", "Lukket", "åbner i dag kl. 16"];
     } else {
       const next = (day + 1) % 7 === 1 ? "tirsdag" : "i morgen";
       text = closedDay ? "Mandag lukket · åbner i morgen 16" : `Lukket · åbner ${next} kl. 16`;
+      short = "Lukket nu";
       sign = ["Vi har", "Lukket", `åbner ${next} kl. 16`];
     }
     const st = $("[data-status]");
     st.classList.toggle("open", open); st.classList.toggle("closed", !open);
-    $("[data-status-text]").textContent = text;
+    $("[data-status-text]").innerHTML = `<span class="s-long">${text}</span><span class="s-short">${short}</span>`;
     const sg = $("[data-sign]");
     sg.dataset.state = open ? "open" : "closed";
     $("[data-sign-top]").textContent = sign[0];
     $("[data-sign-main]").textContent = sign[1];
     $("[data-sign-bottom]").textContent = sign[2];
-    const order = [2, 3, 4, 5, 6, 0, 1];
-    $("[data-hours]").innerHTML = order.map((d) => `<li class="${d === day ? "today" : ""}"><span>${DAYS[d]}</span><span>${d === 1 ? "Lukket" : "16.00 – 20.30"}</span></li>`).join("");
+    // static strings only
+    $("[data-hours]").innerHTML = `<li class="${closedDay ? "" : "today"}"><span>Tirsdag – søndag</span><span>16.00 – 20.30</span></li><li class="${closedDay ? "today" : ""}"><span>Mandag</span><span>Lukket</span></li>`;
   }
   status(); setInterval(status, 60000);
 
@@ -409,7 +408,7 @@
   sign.addEventListener("click", swing);
 
   /* ------------------------------------------------------------ reveal */
-  $$(".sec-head, .menu-head, .year-big, .about-text, .reviews .quote, .ratings, .visit-info, .cat-head").forEach((el) => el.setAttribute("data-reveal", ""));
+  $$(".sec-head, .menu-head, .visit-info, .cat-head").forEach((el) => el.setAttribute("data-reveal", ""));
   const rev = new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); rev.unobserve(e.target); } }), { rootMargin: "0px 0px -10% 0px" });
   $$("[data-reveal]").forEach((el, i) => { el.style.transitionDelay = el.classList.contains("offer") ? `${(i % 4) * 70}ms` : ""; rev.observe(el); });
 

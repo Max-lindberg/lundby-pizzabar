@@ -52,7 +52,6 @@
     <nav class="top-nav" aria-label="Sektioner">
       <a href="#menu">Menukort</a>
       <a href="#tilbud">Menuer</a>
-      <a href="#os">Om os</a>
       <a href="#besoeg">Find os</a>
     </nav>
     <p class="status" data-status><span class="dot"></span><span data-status-text>&nbsp;</span></p>
@@ -74,10 +73,10 @@
           <span class="oc-price">164,-</span>
           <button class="oc-add" type="button" data-hero-add>+ på bongen</button>
         </p>
-        <p class="lede">Ring og sig nummeret. Så er maden klar, når du kommer.<br class="hide-s"> Pizza, grill og kebab – spis her eller tag med hjem.</p>
+        <p class="lede">Ring og sig nummeret. Så er maden klar, når du kommer.<span class="lede-2"> Pizza, grill og kebab – spis her eller tag med hjem.</span></p>
         <div class="cta">
           <a class="btn btn-primary" href="tel:+4555766565">Ring og bestil</a>
-          <a class="btn btn-ghost" href="#menu">Se menukortet <span aria-hidden="true">↓</span></a>
+          <a class="btn btn-ghost" href="#menu">Menukort <span aria-hidden="true">↓</span></a>
         </div>
       </div>
       <div class="hero-pizza" aria-hidden="true">
@@ -101,10 +100,7 @@
     <!-- MENU -->
     <section id="menu" class="menu" aria-labelledby="menu-title">
       <div class="menu-head">
-        <div>
-          <p class="kicker">Menukortet</p>
-          <h2 id="menu-title"><span data-count>95</span> retter.<br>Ét telefonnummer.</h2>
-        </div>
+        <h2 id="menu-title" class="menu-title">Menukortet</h2>
         <p class="menu-intro">Tryk <b class="plus-chip">+</b> ved det, I vil have, så skriver vi det på bongen for dig. Så har du det hele foran dig, når du ringer.</p>
       </div>
 
@@ -112,7 +108,7 @@
         <label class="search">
           <span class="visually-hidden">Søg i menukortet</span>
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          <input type="search" placeholder="Søg – fx kebab, bacon eller 24" data-search autocomplete="off">
+          <input type="search" placeholder="Søg" data-search autocomplete="off">
         </label>
         <div class="sizes" role="radiogroup" aria-label="Pizzastørrelse" data-sizes>
           <span class="sizes-pill" aria-hidden="true"></span>
@@ -127,34 +123,6 @@
         <div class="cats" data-cats></div>
       </div>
       <p class="empty-search" data-empty hidden>Ingen retter matcher. Prøv et andet ord – eller ring og spørg, vi laver det måske alligevel.</p>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="os" class="about" aria-labelledby="about-title">
-      <div class="year" aria-hidden="true">
-        <span class="year-big">1997</span>
-        <span class="year-count"><span data-years>29</span> år i pizzabranchen</span>
-      </div>
-      <div class="about-text">
-        <p class="kicker">Om os</p>
-        <h2 id="about-title">Kvalitet, glade kunder – og altid et smil.</h2>
-        <p>Siden 1997 har vi arbejdet i pizzabranchen. Målet har hele tiden været det samme: lækker mad og tilfredse kunder. Og det sker altid med et smil.</p>
-        <p>Du er velkommen til at spise hos os – inde eller ude, når vejret er til det. Eller ring i forvejen og hent maden varm.</p>
-      </div>
-      <div class="reviews">
-        <div class="ratings">
-          <p><b>4,4</b><span>på Google<br>134 anmeldelser</span></p>
-          <p><b>96 %</b><span>anbefaler os<br>på Facebook</span></p>
-        </div>
-        <figure class="quote">
-          <blockquote>“God service og fråser ikke med tilbehør … og så er de skøre på den gode måde.”</blockquote>
-          <figcaption>Lars, september 2026</figcaption>
-        </figure>
-        <figure class="quote">
-          <blockquote>“Det er virkelig dejligt at have et lokalt pizzaria. Når man kommer der ofte, begynder man at blive gode venner med medarbejderne.”</blockquote>
-          <figcaption>Stamgæst fra Lundby</figcaption>
-        </figure>
-      </div>
     </section>
 
     <!-- VISIT -->
@@ -178,9 +146,16 @@
         <ul class="facts">
           <li>Spis her</li><li>Udendørs servering</li><li>Afhentning</li><li>Dankort &amp; Visa</li><li>Ingen udbringning</li>
         </ul>
-        <div class="cta">
-          <a class="btn btn-primary" href="tel:+4555766565">Ring 55 76 65 65</a>
-          <a class="btn btn-ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Lundby+Pizzabar,+Lundby+Hovedgade+93,+4750+Lundby" target="_blank" rel="noopener">Rutevejledning ↗</a>
+        <div class="map">
+          <iframe title="Kort over Lundby Hovedgade 93, 4750 Lundby" loading="lazy" referrerpolicy="no-referrer"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=11.8665%2C55.1058%2C11.8855%2C55.1128&amp;layer=mapnik"></iframe>
+          <span class="map-pin" aria-hidden="true"><span>Lundby<br>Pizza</span></span>
+          <a class="map-open" href="https://www.google.com/maps/search/?api=1&amp;query=Lundby+Pizzabar,+Lundby+Hovedgade+93,+4750+Lundby" target="_blank" rel="noopener">Åbn stort kort ↗</a>
+        </div>
+        <div class="route">
+          <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=Lundby+Pizzabar,+Lundby+Hovedgade+93,+4750+Lundby" target="_blank" rel="noopener">Rutevejledning <span class="route-sub">Google Maps</span></a>
+          <a class="btn btn-ghost" href="https://maps.apple.com/?daddr=Lundby+Hovedgade+93,+4750+Lundby&amp;q=Lundby+Pizzabar" target="_blank" rel="noopener">Apple Kort</a>
+          <a class="btn btn-ghost" href="tel:+4555766565">Ring 55 76 65 65</a>
         </div>
       </div>
     </section>
