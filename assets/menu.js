@@ -1,4 +1,4 @@
-/* Menukort 2024 – transskriberet fra det trykte menukort (IMG_3308 / Facebook).
+/* Menukort 2024 – kontrolleret mod dagensmenu.dk/lundby-pizza (menukort-scan i høj opløsning).
    Priser i kr. Pizza-størrelser: alm, deep, fam. */
 window.MENU = {
   offers: [
@@ -13,12 +13,12 @@ window.MENU = {
       items: [
         ["1", "Margherita", "", [72, 102, 128]],
         ["2", "Vesuvio", "skinke", [78, 108, 140]],
-        ["3", "Capriciosa", "skinke, champignon", [82, 112, 148]],
+        ["3", "Capricciosa", "skinke, champignon", [82, 112, 148]],
         ["4", "Hawaii", "skinke, ananas", [82, 112, 148]],
         ["5", "Pepperoni", "skinke, pepperoni", [86, 116, 156]],
         ["6", "Italiana", "kødsauce, løg", [86, 116, 156]],
         ["7", "Lundby Flyer", "kylling, friske tomater, paprika, hvidløg, chili", [90, 120, 164]],
-        ["8", "Vegetar", "kartofler, spinat, artiskok, pesto", [99, 129, 182]],
+        ["8", "Kristo", "kartofler, spinat, pesto", [99, 129, 182]],
         ["9", "Zelal", "kebab, kylling", [96, 126, 176]],
         ["10", "Tun", "tun, løg, champignon", [93, 123, 170]],
         ["11", "Juventus", "pepperoni, champignon, paprika", [88, 118, 160]],
@@ -26,7 +26,7 @@ window.MENU = {
         ["13", "Cocktailpølser", "skinke, bacon, cocktailpølser", [98, 128, 180]],
         ["14", "Milan", "champignon, kødboller, jalapenos", [86, 116, 156]],
         ["15", "Torino", "champignon, kebab, løg, paprika", [90, 120, 164]],
-        ["16", "Kong", "kylling, løg, champignon, paprika", [90, 120, 164]],
+        ["16", "Køng", "kylling, løg, champignon, paprika", [90, 120, 164]],
         ["17", "Viking", "kebab, gorgonzola, paprika", [93, 123, 170]],
         ["18", "Apollo", "champignon, kebab, gorgonzola, løg", [96, 126, 176]],
         ["19", "Tina", "champignon, kylling, bacon", [96, 126, 176]],
@@ -45,7 +45,7 @@ window.MENU = {
       id: "mexicansk", nav: "Mexicansk", title: "Mexicansk pizza", note: "Alle pizzaer er med tomatsauce og ost", sizes: ["alm", "deep", "fam"], pizza: true,
       items: [
         ["29", "Mexicana", "pepperoni, kebab, jalapenos, løg, tacosauce", [103, 133, 190]],
-        ["30", "Bårse", "kebab, jalapenos, paprika, hvidløg, tacosauce", [103, 133, 190]],
+        ["30", "Køng", "kebab, jalapenos, paprika, hvidløg, tacosauce", [103, 133, 190]],
         ["31", "Adar", "skinke, champignon, pepperoni, jalapenos, tacosauce", [103, 133, 190]],
         ["32", "Azra", "kebab, kylling, jalapenos, paprika, chili, hvidløg, tacosauce", [103, 133, 190]]
       ]
@@ -86,7 +86,7 @@ window.MENU = {
         ["43A", "½ Kylling", "uden tilbehør", [70]],
         ["44", "Chicken Dipper", "10 stk. med pommes frites, salatmayonnaise, salat og dressing", [95]],
         ["44A", "Chicken Dipper", "10 stk. uden tilbehør", [70]],
-        ["45", "Fiskefilet", "2 stk. med remoulade, pommes frites, salat og dressing", [95]]
+        ["46", "Fiskefilet", "2 stk. med remoulade, pommes frites, salat og dressing", [95]]
       ]
     },
     {

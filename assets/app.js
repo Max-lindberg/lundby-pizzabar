@@ -76,7 +76,10 @@
 
   /* ------------------------------------------------------------ rolling text */
   function roll(el, text, dir = 1) {
+    // settle any roll still in flight so only one value is ever left in the slot
+    while (el.children.length > 1) el.firstElementChild.remove();
     const cur = el.firstElementChild;
+    if (cur) { cur.getAnimations().forEach((a) => a.cancel()); cur.style.position = cur.style.left = cur.style.top = ""; }
     if (cur && cur.textContent === String(text)) return;
     const nxt = document.createElement("span"); nxt.textContent = text;
     if (reduce || !cur) { el.replaceChildren(nxt); return; }
@@ -85,7 +88,8 @@
     const opts = { duration: 560, easing: "cubic-bezier(.16,1,.3,1)", fill: "both" };
     cur.animate([{ transform: "translateY(0)", opacity: 1 }, { transform: `translateY(${-100 * dir}%)`, opacity: 0 }], opts);
     nxt.animate([{ transform: `translateY(${100 * dir}%)`, opacity: 0 }, { transform: "translateY(0)", opacity: 1 }], opts).onfinish = () => {
-      cur.remove(); nxt.style.position = ""; nxt.style.left = ""; nxt.style.top = "";
+      if (cur.isConnected) cur.remove();
+      nxt.style.position = ""; nxt.style.left = ""; nxt.style.top = "";
     };
   }
   function rollSlot(slot, text) {
@@ -274,7 +278,7 @@
     $$("[data-price]").forEach((el, k) => {
       const it = byKey.get(el.dataset.price);
       if (!it.cat.sizes) return;
-      if (animate) setTimeout(() => roll(el, kr(priceFor(it)), dir), Math.min(k, 40) * 12);
+      if (animate) { clearTimeout(el._t); el._t = setTimeout(() => roll(el, kr(priceFor(it)), dir), Math.min(k, 40) * 12); }
       else el.firstElementChild.textContent = kr(priceFor(it));
     });
   }
