@@ -5,6 +5,7 @@
 @font-face { font-family: "IBM Plex Mono"; src: url("../fonts/plexmono-600.woff2") format("woff2"); font-weight: 600; font-display: swap; }
 
 :root {
+  --tk-pull: -38px;
   --paper: #F5EEE2;
   --paper-2: #ECE2D0;
   --slip: #FFFCF6;
@@ -102,7 +103,7 @@ h2 { font: 700 clamp(40px, 6.2vw, 92px)/.92 var(--sans); letter-spacing: -.045em
 @media (prefers-reduced-motion: reduce) { .big-spin { animation: none; } }
 
 /* ---------- ticker ---------- */
-.ticker { position: relative; z-index: 3; background: var(--tomato); color: #FFF4E4; transform: rotate(-2.2deg); margin: var(--tk-pull, -38px) -4vw 26px; padding: 18px 0 14px; overflow: hidden; box-shadow: 0 14px 30px -18px rgba(120, 30, 10, .6); }
+.ticker { position: relative; z-index: 3; background: var(--tomato); color: #FFF4E4; transform: rotate(-2.2deg); margin: var(--tk-pull) -4vw 0; padding: 18px 0 14px; overflow: hidden; box-shadow: 0 14px 30px -18px rgba(120, 30, 10, .6); }
 .ticker-track { display: flex; width: max-content; font: 400 clamp(26px, 3.2vw, 44px)/1 var(--display); white-space: nowrap; will-change: transform; }
 .ticker-track span { padding: 0 .55em; display: inline-flex; align-items: center; gap: .55em; }
 .ticker-track span::after { content: ""; width: .32em; height: .32em; border-radius: 50%; background: var(--cheese); }
@@ -119,7 +120,7 @@ h2 { font: 700 clamp(40px, 6.2vw, 92px)/.92 var(--sans); letter-spacing: -.045em
 .add.done { background: var(--basil); border-color: var(--basil); color: #fff; }
 
 /* ---------- menu ---------- */
-.menu { padding: clamp(60px, 8vw, 120px) var(--pad) clamp(80px, 10vw, 150px); background: var(--slip); border-block: 1px solid var(--line); position: relative; }
+.menu { margin-top: var(--tk-pull); padding: clamp(60px, 8vw, 120px) var(--pad) clamp(80px, 10vw, 150px); background: var(--slip); border-bottom: 1px solid var(--line); position: relative; }
 .menu-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 12px 30px; margin-bottom: 26px; }
 .menu-title { font: 400 clamp(44px, 5.4vw, 80px)/1 var(--display); color: var(--ink); letter-spacing: -.01em; }
 .menu-intro { font-size: 18px; color: var(--ink-2); max-width: 26em; }
@@ -302,7 +303,8 @@ h2 { font: 700 clamp(40px, 6.2vw, 92px)/.92 var(--sans); letter-spacing: -.045em
   .brand-word { font-size: 23px; }
   .top { gap: 14px; }
   .status { font-size: 12px; }
-  .ticker { --tk-pull: -22px; padding: 12px 0 9px; }
+  :root { --tk-pull: -22px; }
+  .ticker { padding: 12px 0 9px; }
   .ticker-track { font-size: 24px; }
   .menu { padding-top: 46px; }
   .menu-intro { font-size: 15px; }
