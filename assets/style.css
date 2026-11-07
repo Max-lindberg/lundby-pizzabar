@@ -214,11 +214,11 @@ h2 { font: 700 clamp(40px, 6.2vw, 92px)/.92 var(--sans); letter-spacing: -.045em
 .route-sub { font-weight: 400; opacity: .75; font-size: 13px; }
 
 /* ---------- about ---------- */
-.about { position: relative; margin-top: var(--tk-pull); display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 20px clamp(30px, 6vw, 100px); padding: clamp(100px, 11vw, 160px) var(--pad) clamp(70px, 9vw, 120px); background: var(--paper); }
-.about .kicker { margin: 10px 0 0; }
-.about .since { color: var(--muted); }
-.about-text h2 { font-size: clamp(30px, 3.4vw, 50px); line-height: 1.02; letter-spacing: -.035em; max-width: 16em; }
-.about-text p { margin-top: 18px; max-width: 34em; font-size: clamp(17px, 1.3vw, 19px); color: var(--ink-2); }
+.about { position: relative; margin-top: var(--tk-pull); padding: clamp(100px, 10vw, 150px) var(--pad) clamp(70px, 8vw, 120px); background: var(--paper); }
+.about .kicker { margin: 0 0 22px; }
+.about-text { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(22px, 2.4vw, 36px) clamp(30px, 5vw, 80px); }
+.about-text h2 { grid-column: 1 / -1; font-size: clamp(46px, 6vw, 100px); line-height: .95; letter-spacing: -.045em; max-width: 13em; }
+.about-text p { font-size: clamp(19px, 1.65vw, 26px); line-height: 1.45; color: var(--ink-2); max-width: 30em; }
 
 /* ---------- footer ---------- */
 .foot { background: var(--ink); color: var(--paper); padding: clamp(60px, 8vw, 110px) var(--pad) 40px; overflow: hidden; }
@@ -327,7 +327,8 @@ h2 { font: 700 clamp(40px, 6.2vw, 92px)/.92 var(--sans); letter-spacing: -.045em
   .status .s-short { display: inline; }
   .status [data-status-text] { overflow: hidden; text-overflow: ellipsis; }
   .brand { flex: none; }
-  .visit, .about { grid-template-columns: 1fr; }
+  .visit { grid-template-columns: 1fr; }
+  .about-text { grid-template-columns: 1fr; }
   .about { padding-block: 72px 52px; gap: 4px; }
   .menu-head { grid-template-columns: 1fr; }
   .menu-tools { top: var(--top-h); }
