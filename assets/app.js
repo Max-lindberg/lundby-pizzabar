@@ -408,7 +408,7 @@
   sign.addEventListener("click", swing);
 
   /* ------------------------------------------------------------ reveal */
-  $$(".sec-head, .menu-head, .visit-info, .cat-head").forEach((el) => el.setAttribute("data-reveal", ""));
+  $$(".sec-head, .menu-head, .visit-info, .cat-head, .about-text").forEach((el) => el.setAttribute("data-reveal", ""));
   const rev = new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); rev.unobserve(e.target); } }), { rootMargin: "0px 0px -10% 0px" });
   $$("[data-reveal]").forEach((el, i) => { el.style.transitionDelay = el.classList.contains("offer") ? `${(i % 4) * 70}ms` : ""; rev.observe(el); });
 
