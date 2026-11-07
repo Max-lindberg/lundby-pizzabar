@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Lundby Pizza & Grillbar · Lundby Hovedgade 93 · Tlf. 55 76 65 65</title>
+  <meta name="description" content="Pizza, grill, burger og kebab på Lundby Hovedgade 93 siden 1997. Ring 55 76 65 65 og bestil i forvejen – så er maden klar, når du kommer. Åbent tirsdag–søndag 16–20.30.">
+  <meta name="theme-color" content="#F5EEE2">
+  <meta property="og:title" content="Lundby Pizza & Grillbar">
+  <meta property="og:description" content="Ring 55 76 65 65 og sig nummeret. Så er den klar, når du kommer.">
+  <meta property="og:type" content="restaurant">
+  <meta property="og:locale" content="da_DK">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/familjen.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/shrikhand.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Lundby Pizza & Grillbar",
+    "telephone": "+45 55 76 65 65",
+    "email": "Vibenhus@hotmail.com",
+    "servesCuisine": ["Pizza", "Burger", "Kebab"],
+    "priceRange": "$$",
+    "acceptsReservations": false,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Lundby Hovedgade 93, st. tv.",
+      "postalCode": "4750",
+      "addressLocality": "Lundby",
+      "addressCountry": "DK"
+    },
+    "geo": { "@type": "GeoCoordinates", "latitude": 55.10929, "longitude": 11.87598 },
+    "openingHoursSpecification": [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "16:00", "closes": "20:30"
+    }],
+    "sameAs": ["https://www.facebook.com/profile.php?id=100044801750668"]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip" href="#menu">Spring til menukortet</a>
+
+  <header class="top" data-top>
+    <a class="brand" href="#top" aria-label="Lundby Pizza & Grillbar, til toppen">
+      <span class="brand-word">Lundby</span>
+      <span class="brand-sub">Pizza &amp; Grillbar</span>
+    </a>
+    <nav class="top-nav" aria-label="Sektioner">
+      <a href="#menu">Menukort</a>
+      <a href="#tilbud">Menuer</a>
+      <a href="#os">Om os</a>
+      <a href="#besoeg">Find os</a>
+    </nav>
+    <p class="status" data-status><span class="dot"></span><span data-status-text>&nbsp;</span></p>
+    <a class="btn btn-call" href="tel:+4555766565" aria-label="Ring 55 76 65 65"><span class="num"><span class="hide-s">Ring </span>55 76 65 65</span></a>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span>Lundby Hovedgade 93</span><span>Siden 1997</span></p>
+        <h1 id="hero-title" class="order" aria-live="off">
+          <span class="o-line"><span class="o-w">Nr.</span> <span class="slot slot-num" data-slot="num"><span>7</span></span><span class="o-w">,</span></span>
+          <span class="o-line"><span class="slot slot-size" data-slot="size"><span>familie</span></span><span class="o-w">,</span> <span class="o-w o-tak">tak.</span></span>
+        </h1>
+        <p class="order-caption" data-caption>
+          <span class="oc-name">Lundby Flyer</span>
+          <span class="oc-desc">kylling, friske tomater, paprika, hvidløg, chili</span>
+          <span class="oc-price">164,-</span>
+          <button class="oc-add" type="button" data-hero-add>+ på bongen</button>
+        </p>
+        <p class="lede">Ring og sig nummeret. Så er maden klar, når du kommer.<br class="hide-s"> Pizza, grill og kebab – spis her eller tag med hjem.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="tel:+4555766565">Ring og bestil</a>
+          <a class="btn btn-ghost" href="#menu">Se menukortet <span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+      <div class="hero-pizza" aria-hidden="true">
+        <div class="plate"></div>
+        <svg id="heroPizza" viewBox="-130 -130 260 260"></svg>
+      </div>
+    </section>
+
+    <!-- TICKER -->
+    <div class="ticker" aria-hidden="true"><div class="ticker-track" data-ticker></div></div>
+
+    <!-- OFFERS -->
+    <section id="tilbud" class="offers" aria-labelledby="offers-title">
+      <div class="sec-head">
+        <p class="kicker">Faste menuer</p>
+        <h2 id="offers-title">Når sulten ikke<br>gider vælge.</h2>
+      </div>
+      <ul class="offer-list" data-offers></ul>
+    </section>
+
+    <!-- MENU -->
+    <section id="menu" class="menu" aria-labelledby="menu-title">
+      <div class="menu-head">
+        <div>
+          <p class="kicker">Menukortet</p>
+          <h2 id="menu-title"><span data-count>95</span> retter.<br>Ét telefonnummer.</h2>
+        </div>
+        <p class="menu-intro">Tryk <b class="plus-chip">+</b> ved det, I vil have, så skriver vi det på bongen for dig. Så har du det hele foran dig, når du ringer.</p>
+      </div>
+
+      <div class="menu-tools" data-tools>
+        <label class="search">
+          <span class="visually-hidden">Søg i menukortet</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <input type="search" placeholder="Søg – fx kebab, bacon eller 24" data-search autocomplete="off">
+        </label>
+        <div class="sizes" role="radiogroup" aria-label="Pizzastørrelse" data-sizes>
+          <span class="sizes-pill" aria-hidden="true"></span>
+          <button type="button" role="radio" aria-checked="true" data-size="alm">Alm.</button>
+          <button type="button" role="radio" aria-checked="false" data-size="deep">Deep</button>
+          <button type="button" role="radio" aria-checked="false" data-size="fam">Familie</button>
+        </div>
+      </div>
+
+      <div class="menu-body">
+        <nav class="cat-nav" aria-label="Kategorier" data-catnav></nav>
+        <div class="cats" data-cats></div>
+      </div>
+      <p class="empty-search" data-empty hidden>Ingen retter matcher. Prøv et andet ord – eller ring og spørg, vi laver det måske alligevel.</p>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="os" class="about" aria-labelledby="about-title">
+      <div class="year" aria-hidden="true">
+        <span class="year-big">1997</span>
+        <span class="year-count"><span data-years>29</span> år i pizzabranchen</span>
+      </div>
+      <div class="about-text">
+        <p class="kicker">Om os</p>
+        <h2 id="about-title">Kvalitet, glade kunder – og altid et smil.</h2>
+        <p>Siden 1997 har vi arbejdet i pizzabranchen. Målet har hele tiden været det samme: lækker mad og tilfredse kunder. Og det sker altid med et smil.</p>
+        <p>Du er velkommen til at spise hos os – inde eller ude, når vejret er til det. Eller ring i forvejen og hent maden varm.</p>
+      </div>
+      <div class="reviews">
+        <div class="ratings">
+          <p><b>4,4</b><span>på Google<br>134 anmeldelser</span></p>
+          <p><b>96 %</b><span>anbefaler os<br>på Facebook</span></p>
+        </div>
+        <figure class="quote">
+          <blockquote>“God service og fråser ikke med tilbehør … og så er de skøre på den gode måde.”</blockquote>
+          <figcaption>Lars, september 2026</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>“Det er virkelig dejligt at have et lokalt pizzaria. Når man kommer der ofte, begynder man at blive gode venner med medarbejderne.”</blockquote>
+          <figcaption>Stamgæst fra Lundby</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- VISIT -->
+    <section id="besoeg" class="visit" aria-labelledby="visit-title">
+      <div class="sign-wrap">
+        <div class="sign" data-sign>
+          <span class="sign-nail"></span>
+          <svg class="sign-cord" viewBox="0 0 200 60" aria-hidden="true"><path d="M30 58 100 4l70 54" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+          <div class="sign-board">
+            <small data-sign-top>Vi har</small>
+            <strong data-sign-main>Åbent</strong>
+            <small data-sign-bottom>til kl. 20.30</small>
+          </div>
+        </div>
+      </div>
+      <div class="visit-info">
+        <p class="kicker">Find os</p>
+        <h2 id="visit-title">Lundby Hovedgade 93</h2>
+        <p class="addr">4750 Lundby · lige ved stationen</p>
+        <ul class="hours" data-hours></ul>
+        <ul class="facts">
+          <li>Spis her</li><li>Udendørs servering</li><li>Afhentning</li><li>Dankort &amp; Visa</li><li>Ingen udbringning</li>
+        </ul>
+        <div class="cta">
+          <a class="btn btn-primary" href="tel:+4555766565">Ring 55 76 65 65</a>
+          <a class="btn btn-ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Lundby+Pizzabar,+Lundby+Hovedgade+93,+4750+Lundby" target="_blank" rel="noopener">Rutevejledning ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p class="foot-kicker">Bestil i forvejen – så er den klar, når du kommer</p>
+    <a class="giant" href="tel:+4555766565" aria-label="Ring 55 76 65 65"><span>55</span><span>76</span><span>65</span><span>65</span></a>
+    <div class="foot-row">
+      <p>Lundby Pizza &amp; Grillbar · Lundby Hovedgade 93, st. tv. · 4750 Lundby</p>
+      <p><a href="mailto:Vibenhus@hotmail.com">Vibenhus@hotmail.com</a> · <a href="https://www.facebook.com/profile.php?id=100044801750668" target="_blank" rel="noopener">Facebook</a></p>
+      <p class="muted">Priser fra menukort 2024. Ret til ændringer forbeholdes.</p>
+    </div>
+  </footer>
+
+  <!-- BONG (order slip) -->
+  <div class="bong" data-bong data-open="false">
+    <button class="bong-fab" type="button" data-bong-toggle aria-expanded="false" aria-controls="bong-sheet">
+      <span class="fab-label">Bongen</span>
+      <span class="fab-count" data-bong-count>0</span>
+      <span class="fab-total" data-bong-fabtotal></span>
+    </button>
+    <div class="bong-sheet" id="bong-sheet" role="dialog" aria-label="Din bong" aria-modal="false">
+      <div class="printer"><span class="printer-slot"></span><button class="bong-close" type="button" data-bong-close aria-label="Luk bongen">×</button></div>
+      <div class="paper-clip">
+        <div class="paper" data-paper>
+          <div class="p-head">
+            <strong>LUNDBY PIZZA &amp; GRILLBAR</strong>
+            <span>Lundby Hovedgade 93</span>
+            <span>Tlf. 55 76 65 65</span>
+            <span data-bong-date></span>
+          </div>
+          <ol class="p-lines" data-bong-lines></ol>
+          <p class="p-empty" data-bong-empty>Bongen er tom.<br>Tryk + ved en ret for at skrive den på.</p>
+          <div class="p-total"><span>I ALT</span><span data-bong-total>0,-</span></div>
+          <div class="p-say" data-bong-say></div>
+          <a class="btn btn-primary p-call" href="tel:+4555766565">Ring og bestil</a>
+          <button class="p-clear" type="button" data-bong-clear>Ryd bongen</button>
+          <p class="p-fine">Bongen gemmes kun på din egen telefon. Vi modtager ikke bestillinger her – ring til os.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/menu.js"></script>
+  <script src="assets/pizza.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
